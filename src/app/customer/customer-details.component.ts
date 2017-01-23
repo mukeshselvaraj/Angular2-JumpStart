@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { ICustomer } from '../shared/interfaces';
-import { DataService } from '../core/services/data.service';
+import { DataService } from '../core/data.service';
 
 @Component({
   moduleId: module.id,
@@ -12,6 +12,7 @@ import { DataService } from '../core/services/data.service';
 export class CustomerDetailsComponent implements OnInit {
 
   customer: ICustomer;
+  mapEnabled: boolean;
 
   constructor(private route: ActivatedRoute, private dataService: DataService) { }
 
@@ -20,7 +21,10 @@ export class CustomerDetailsComponent implements OnInit {
       this.route.parent.params.subscribe((params: Params) => {
         let id = +params['id'];
         this.dataService.getCustomer(id)
-            .subscribe((customer: ICustomer) => this.customer = customer);
+            .subscribe((customer: ICustomer) => {
+              this.customer = customer;
+              this.mapEnabled = true;
+            });
       });
   }
 

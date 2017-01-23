@@ -8,6 +8,7 @@ export interface ICustomer {
     address: string;
     city: string;
     state: IState;
+    orders?: IOrder[];
     orderTotal?: number;
 }
 
@@ -17,8 +18,8 @@ export interface IState {
 }
 
 export interface IOrder {
-    customerId: number;
-    orderItems: IOrderItem[];
+    productName: string;
+    itemCost: number;
 }
 
 export interface IOrderItem {
@@ -30,4 +31,14 @@ export interface IOrderItem {
 export interface IRouting {
     routes: ModuleWithProviders,
     components: any[]
+}
+
+export interface IPagedResults<T> {
+    totalRecords: number;
+    results: T;
+}
+
+export interface IUserLogin {
+    email: string;
+    password: string;
 }
